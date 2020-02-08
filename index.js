@@ -10,6 +10,11 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+process.on('unhandledRejection', (reason, p) => {
+  console.error('Unhandled Rejection at:', p, 'reason:', reason)
+  process.exit(1)
+});
+
 app.get('/', async (req, res) => {
   const query = 'CALL getUsers();'
 
