@@ -18,12 +18,17 @@ process.on('unhandledRejection', (reason, p) => {
 app.get('/', async (req, res) => {
   const query = 'CALL getUsers();'
 
-  try {
-    const result = await pool.query(query)
-    res.send(result[0][0])
-  } catch (error) {
-    throw new Error(error)
-  }
+  res.send({
+    rs: 200,
+    data: [
+      'Juan', 17
+    ]
+  })
+  // try {
+  //   const result = await pool.query(query)
+  // } catch (error) {
+  //   throw new Error(error)
+  // }
 })
 
 app.post('/', async (req, res) => {
@@ -31,12 +36,17 @@ app.post('/', async (req, res) => {
   const { nombres, apellidos, edad, email } = req.body
   const sql = 'CALL addUser (?, ?, ?, ?);'
 
-  try {
-    const result = await pool.query(sql, [nombres, apellidos, edad, email])
-    res.send(result[0].data)
-  } catch (error) {
-    throw new Error(error)
-  }
+  res.send({
+    rs: 200,
+    data: [
+      'Juan', 17
+    ]
+  })
+  // try {
+  //   const result = await pool.query(sql, [nombres, apellidos, edad, email])
+  // } catch (error) {
+  //   throw new Error(error)
+  // }
 })
 
 app.listen(PORT, () => {
